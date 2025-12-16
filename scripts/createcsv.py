@@ -1,6 +1,6 @@
 import pandas as pd
 
-output_path = "/Users/katiewojciechowski/Projects/bakery-pipeline/source-data/"
+output_path = "/Users/katiewojciechowski/Projects/bakery-pipeline/bakery-pipeline/source-data/"
 
 # ----------------------
 # Shopify Products

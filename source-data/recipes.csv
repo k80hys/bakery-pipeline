@@ -1,0 +1,28 @@
+sku,ingredient,quantity_unit,quantity
+CK-CHOC-001,All-purpose flour,cups,2.5
+CK-CHOC-001,Butter,cups,1.0
+CK-CHOC-001,White sugar,cups,1.0
+CK-CHOC-001,Brown sugar,cups,1.0
+CK-CHOC-001,Chocolate chips,cups,2.0
+CK-CHOC-001,Eggs,count,2.0
+CK-CHOC-001,Vanilla extract,tbsp,1.0
+CK-CHOC-001,Baking soda,tsp,1.0
+CK-CHOC-001,Salt,tsp,0.5
+CK-SUGAR-001,All-purpose flour,cups,3.0
+CK-SUGAR-001,Butter,cups,1.0
+CK-SUGAR-001,White sugar,cups,1.5
+CK-SUGAR-001,Eggs,count,2.0
+CK-SUGAR-001,Vanilla extract,tsp,2.0
+CK-SUGAR-001,Baking powder,tsp,1.0
+CK-SUGAR-001,Salt,tsp,0.25
+CK-NUTMARB-001,All-purpose flour,cups,2.5
+CK-NUTMARB-001,Butter,cups,1.0
+CK-NUTMARB-001,Brown sugar,cups,1.25
+CK-NUTMARB-001,Eggs,count,2.0
+CK-NUTMARB-001,Chocolate chips,cups,1.5
+CK-NUTMARB-001,Nutella,cups,0.75
+CK-NUTMARB-001,Baking soda,tsp,1.0
+CK-NUTMARB-001,Salt,tsp,0.5
+ADD-NUTELLA,Nutella,cups,0.25
+ADD-PB,Crunchy peanut butter,cups,0.25
+ADD-SEASALT,Sea salt,tsp,0.1

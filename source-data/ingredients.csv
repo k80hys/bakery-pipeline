@@ -1,0 +1,14 @@
+ingredient,unit,grams_per_unit,supplier,container_description,container_grams,cost_per_unit,cost_per_gram
+All-purpose flour,cup,120.0,FlourCo,1 lb bag,454,0.25,0.002083
+Butter,cup,227.0,DairyBest,4-stick box (1 lb),454,1.2,0.005286
+White sugar,cup,200.0,SweetSource,4 lb bag,1814,0.4,0.002
+Brown sugar,cup,220.0,SweetSource,2 lb bag,907,0.45,0.002045
+Chocolate chips,cup,170.0,CocoaWorld,24 oz bag,680,1.5,0.008824
+Eggs,count,50.0,FarmFresh,Dozen eggs,600,0.3,0.006
+Vanilla extract,tbsp,13.0,FlavorHouse,8 oz bottle,227,0.8,0.061538
+Baking soda,tsp,4.6,BakeSupply,1 lb box,454,0.05,0.01087
+Baking powder,tsp,4.0,BakeSupply,1 lb container,454,0.05,0.0125
+Salt,tsp,6.0,SaltWorks,3 lb box,1360,0.02,0.003333
+Nutella,cup,300.0,Hazelnut Corp,26 oz jar,737,1.75,0.005833
+Crunchy peanut butter,cup,250.0,NuttyFoods,16 oz jar,454,1.2,0.0048
+Sea salt,tsp,6.0,SaltWorks,1 lb pouch,454,0.03,0.005
