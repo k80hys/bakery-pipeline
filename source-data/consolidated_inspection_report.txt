@@ -1,0 +1,158 @@
+Inspecting file: ./source-data/shopify_orders.csv
+
+Column Names and Data Types:
+order_id        int64
+date           object
+sku            object
+quantity        int64
+add_on_sku     object
+total_price     int64
+dtype: object
+
+Number of Rows: 100
+
+Sample Rows:
+   order_id        date             sku  quantity   add_on_sku  total_price
+0      1001  2024-01-02     CK-CHOC-001         1  ADD-NUTELLA           32
+1      1002  2024-01-02    CK-SUGAR-001         2          NaN           56
+2      1003  2024-01-03  CK-NUTMARB-001         1  ADD-SEASALT           28
+3      1004  2024-01-03     CK-CHOC-001         3       ADD-PB           96
+4      1005  2024-01-03    CK-SUGAR-001         1  ADD-SEASALT           28
+
+Basic Statistics for Numeric Columns:
+          order_id    quantity  total_price
+count   100.000000  100.000000   100.000000
+mean   1050.500000    2.090000    61.440000
+std      29.011492    1.064534    31.967256
+min    1001.000000    1.000000    28.000000
+25%    1025.750000    1.000000    28.000000
+50%    1050.500000    2.000000    56.000000
+75%    1075.250000    3.000000    84.000000
+max    1100.000000    5.000000   160.000000
+
+Missing Values per Column:
+add_on_sku    46
+dtype: int64
+
+Number of Duplicate Rows: 0
+
+================================================================================
+
+Inspecting file: ./source-data/ingredients.csv
+
+Column Names and Data Types:
+ingredient                object
+unit                      object
+grams_per_unit           float64
+supplier                  object
+container_description     object
+container_grams            int64
+cost_per_unit            float64
+cost_per_gram            float64
+dtype: object
+
+Number of Rows: 13
+
+Sample Rows:
+          ingredient unit  grams_per_unit  ... container_grams cost_per_unit  cost_per_gram
+0  All-purpose flour  cup           120.0  ...             454          0.25       0.002083
+1             Butter  cup           227.0  ...             454          1.20       0.005286
+2        White sugar  cup           200.0  ...            1814          0.40       0.002000
+3        Brown sugar  cup           220.0  ...             907          0.45       0.002045
+4    Chocolate chips  cup           170.0  ...             680          1.50       0.008824
+
+[5 rows x 8 columns]
+
+Basic Statistics for Numeric Columns:
+       grams_per_unit  container_grams  cost_per_unit  cost_per_gram
+count       13.000000        13.000000      13.000000      13.000000
+mean       120.815385       696.076923       0.615385       0.010009
+std        111.338267       439.492029       0.607640       0.015829
+min          4.000000       227.000000       0.020000       0.002000
+25%          6.000000       454.000000       0.050000       0.003333
+50%        120.000000       454.000000       0.400000       0.005286
+75%        220.000000       737.000000       1.200000       0.008824
+max        300.000000      1814.000000       1.750000       0.061538
+
+Missing Values per Column:
+Series([], dtype: int64)
+
+Number of Duplicate Rows: 0
+
+================================================================================
+
+Inspecting file: ./source-data/recipes.csv
+
+Column Names and Data Types:
+sku               object
+ingredient        object
+quantity_unit     object
+quantity         float64
+dtype: object
+
+Number of Rows: 27
+
+Sample Rows:
+           sku         ingredient quantity_unit  quantity
+0  CK-CHOC-001  All-purpose flour          cups       2.5
+1  CK-CHOC-001             Butter          cups       1.0
+2  CK-CHOC-001        White sugar          cups       1.0
+3  CK-CHOC-001        Brown sugar          cups       1.0
+4  CK-CHOC-001    Chocolate chips          cups       2.0
+
+Basic Statistics for Numeric Columns:
+        quantity
+count  27.000000
+mean    1.253704
+std     0.769231
+min     0.100000
+25%     0.875000
+50%     1.000000
+75%     2.000000
+max     3.000000
+
+Missing Values per Column:
+Series([], dtype: int64)
+
+Number of Duplicate Rows: 0
+
+================================================================================
+
+Inspecting file: ./source-data/shopify_products.csv
+
+Column Names and Data Types:
+cookie_sku      object
+product_name    object
+category        object
+price            int64
+dtype: object
+
+Number of Rows: 6
+
+Sample Rows:
+       cookie_sku                            product_name       category  price
+0     CK-CHOC-001                  Chocolate Chip Cookies  Dozen Cookies     28
+1    CK-SUGAR-001                    Emmy's Sugar Cookies  Dozen Cookies     28
+2  CK-NUTMARB-001  Nutella Marbled Chocolate Chip Cookies  Dozen Cookies     28
+3     ADD-NUTELLA                        Nutella Stuffing         Add-on      4
+4          ADD-PB          Crunchy Peanut Butter Stuffing         Add-on      4
+
+Basic Statistics for Numeric Columns:
+           price
+count   6.000000
+mean   15.333333
+std    13.952300
+min     0.000000
+25%     4.000000
+50%    16.000000
+75%    28.000000
+max    28.000000
+
+Missing Values per Column:
+price    1
+dtype: int64
+
+Number of Duplicate Rows: 0
+
+================================================================================
+

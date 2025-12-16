@@ -1,3 +1,9 @@
+'''
+Python script to create CSV files for bakery pipeline data.
+Using ChatGPT-generated dummy data to simulate Shopify data 
+for orders and products, and ingredient/recipe data for cost calculations.
+'''
+
 import pandas as pd
 
 output_path = "/Users/katiewojciechowski/Projects/bakery-pipeline/bakery-pipeline/source-data/"
