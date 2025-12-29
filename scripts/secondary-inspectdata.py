@@ -1,3 +1,40 @@
+'''
+1. Referential Integrity Checks 
+Orders → Products 
+- Every Orders.sku must exist in Products.cookie_sku. 
+- Every non-null Orders.add_on_sku must exist in Products.cookie_sku. 
+Recipes → Products 
+- Every Recipes.sku must exist in Products.cookie_sku. 
+Recipes → Ingredients 
+- Every Recipes.ingredient must exist in Ingredients.ingredient. 
+
+2. Domain & Validity Checks 
+Quantities must be positive
+- Orders.quantity > 0 
+- Recipes.quantity > 0 
+Monetary Fields must be non-negative
+- Products.price ≥ 0 
+- Orders.total_price ≥ 0 
+- Ingredients.cost_per_unit ≥ 0 
+- Ingredients.cost_per_gram ≥ 0 
+Controlled Vocabularies 
+- Products.category ∈ {“Dozen Cookies”, “Add-on”} 
+- Recipes.quantity_unit must match a valid Ingredients.unit 
+
+3. Consistency & Derivation Checks 
+Cost Calculations 
+- cost_per_gram ≈ cost_per_unit / grams_per_unit 
+- Variance beyond rounding tolerance should be flagged. 
+Packaging Consistency 
+- container_grams ≥ grams_per_unit 
+
+4. Completeness Checks 
+No nulls in primary identifiers: 
+- Orders.order_id 
+- Products.cookie_sku 
+- Ingredients.ingredient
+'''
+
 import os
 import pandas as pd
 

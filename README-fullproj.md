@@ -27,6 +27,6 @@ I don't like paying for a ChatGPT subscription, and you can't export CSV files i
 For the sake of this project, the source data will be shopify_orders.csv, shopify_products.csv, recipes.csv, and ingredients.csv. The first two are meant to simulate Shopify exports for a small business, while the second two are meant to simulate recipe and ingredients manual documentation. The Orders data will update on a regular cadence, while the other three will not and will only be updated as needed when business changes are made.
 
 ## Inspect data
-I created the initial-inspectdata.py file to show basic stats about the CSV data created - column names, row counts, missing values, etc. The results are printed in the /source-data/consolidated_inspection_report.txt file.
+I created the initial-inspectdata.py file to show basic stats about the CSV data created - column names, row counts, missing values, etc. The results are printed in the /source-data/consolidated_inspection_report.txt file. After I drafted up the Data Dictionary (found in the audit), I created a second script (/source-data/second_inspection.txt) to check for granular consistency issues like referential rules. Using that knowledge, I constructed the analytical model. The ERD and star schema diagrams can be found embedded in the audit as well as within this project under /documentation.
 
 // Next steps: Create data audit and business requirements/KPI definitions, upload files to GitHub project
