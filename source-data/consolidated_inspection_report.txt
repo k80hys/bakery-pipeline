@@ -1,23 +1,23 @@
 Inspecting file: ./source-data/shopify_orders.csv
 
 Column Names and Data Types:
-order_id        int64
-date           object
-sku            object
-quantity        int64
-add_on_sku     object
-total_price     int64
+order_id         int64
+date            object
+sku             object
+quantity         int64
+add_on_sku      object
+total_price    float64
 dtype: object
 
 Number of Rows: 100
 
 Sample Rows:
    order_id        date             sku  quantity   add_on_sku  total_price
-0      1001  2024-01-02     CK-CHOC-001         1  ADD-NUTELLA           32
-1      1002  2024-01-02    CK-SUGAR-001         2          NaN           56
-2      1003  2024-01-03  CK-NUTMARB-001         1  ADD-SEASALT           28
-3      1004  2024-01-03     CK-CHOC-001         3       ADD-PB           96
-4      1005  2024-01-03    CK-SUGAR-001         1  ADD-SEASALT           28
+0      1001  2024-01-02     CK-CHOC-001         1  ADD-NUTELLA         32.0
+1      1002  2024-01-02    CK-SUGAR-001         2          NaN         56.0
+2      1003  2024-01-03  CK-NUTMARB-001         1  ADD-SEASALT         28.0
+3      1004  2024-01-03     CK-CHOC-001         3       ADD-PB         96.0
+4      1005  2024-01-03    CK-SUGAR-001         1  ADD-SEASALT         28.0
 
 Basic Statistics for Numeric Columns:
           order_id    quantity  total_price
@@ -54,14 +54,12 @@ dtype: object
 Number of Rows: 13
 
 Sample Rows:
-          ingredient unit  grams_per_unit  ... container_grams cost_per_unit  cost_per_gram
-0  All-purpose flour  cup           120.0  ...             454          0.25       0.002083
-1             Butter  cup           227.0  ...             454          1.20       0.005286
-2        White sugar  cup           200.0  ...            1814          0.40       0.002000
-3        Brown sugar  cup           220.0  ...             907          0.45       0.002045
-4    Chocolate chips  cup           170.0  ...             680          1.50       0.008824
-
-[5 rows x 8 columns]
+          ingredient unit  grams_per_unit     supplier container_description  container_grams  cost_per_unit  cost_per_gram
+0  All-purpose flour  cup           120.0      FlourCo              1 lb bag              454           0.25       0.002083
+1             Butter  cup           227.0    DairyBest    4-stick box (1 lb)              454           1.20       0.005286
+2        White sugar  cup           200.0  SweetSource              4 lb bag             1814           0.40       0.002000
+3        Brown sugar  cup           220.0  SweetSource              2 lb bag              907           0.45       0.002045
+4    Chocolate chips  cup           170.0   CocoaWorld             24 oz bag              680           1.50       0.008824
 
 Basic Statistics for Numeric Columns:
        grams_per_unit  container_grams  cost_per_unit  cost_per_gram
@@ -121,21 +119,21 @@ Number of Duplicate Rows: 0
 Inspecting file: ./source-data/shopify_products.csv
 
 Column Names and Data Types:
-cookie_sku      object
-product_name    object
-category        object
-price            int64
+cookie_sku       object
+product_name     object
+category         object
+price           float64
 dtype: object
 
 Number of Rows: 6
 
 Sample Rows:
        cookie_sku                            product_name       category  price
-0     CK-CHOC-001                  Chocolate Chip Cookies  Dozen Cookies     28
-1    CK-SUGAR-001                    Emmy's Sugar Cookies  Dozen Cookies     28
-2  CK-NUTMARB-001  Nutella Marbled Chocolate Chip Cookies  Dozen Cookies     28
-3     ADD-NUTELLA                        Nutella Stuffing         Add-on      4
-4          ADD-PB          Crunchy Peanut Butter Stuffing         Add-on      4
+0     CK-CHOC-001                  Chocolate Chip Cookies  Dozen Cookies   28.0
+1    CK-SUGAR-001                    Emmy's Sugar Cookies  Dozen Cookies   28.0
+2  CK-NUTMARB-001  Nutella Marbled Chocolate Chip Cookies  Dozen Cookies   28.0
+3     ADD-NUTELLA                        Nutella Stuffing         Add-on    4.0
+4          ADD-PB          Crunchy Peanut Butter Stuffing         Add-on    4.0
 
 Basic Statistics for Numeric Columns:
            price
