@@ -29,4 +29,5 @@ For the sake of this project, the source data will be shopify_orders.csv, shopif
 ## Inspect data
 I created the initial-inspectdata.py file to show basic stats about the CSV data created - column names, row counts, missing values, etc. The results are printed in the /source-data/consolidated_inspection_report.txt file. After I drafted up the Data Dictionary (found in the audit), I created a second script (/source-data/second_inspection.txt) to check for granular consistency issues like referential rules. Using that knowledge, I constructed the analytical model. The ERD and star schema diagrams can be found embedded in the audit as well as within this project under /documentation.
 
-// Next steps: Create data audit and business requirements/KPI definitions, upload files to GitHub project
+## Execute ETL
+Using the logic laid out in the analytical model, I created an ran the etl.py script. Since this data was fabricated, there weren't a lot of transformations needed, but I renamed a few columns for continuity and created additional date attributes for the date dimension. I also created a numeric key value for each product, ingredient, order, and date, as well as a calculated cost_per_gram attribute. I loaded the output to CSV files in the /staging-data folder.
