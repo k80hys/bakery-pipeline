@@ -25,13 +25,13 @@ This project includes the following components:
 - **Insights & business recommendations**
 - **README & future enhancements**
 
-## Generate data
+## Source Data Generation and Ingestion Preparation
 
 I don't like paying for a ChatGPT subscription, and you can't export CSV files in the free version, so I had it generate pre-formatted dummy data I could easily copy, paste, and plug into a Python script (`createcsv.py`) that loaded it all into CSVs that were immediately usable for the project. I know in real life the source data might not be quite this neat and ready to use, but there are still some imperfections that I'll be able to clean up in the transform stage to demonstrate my capability there. CSVs are stored in `/source-data`.
 
 For the sake of this project, the source data will be `shopify_orders.csv`, `shopify_products.csv`, `recipes.csv`, and `ingredients.csv`. The first two are meant to simulate Shopify exports for a small business, while the second two are meant to simulate recipe and ingredients manual documentation. The Orders data will update on a regular cadence, while the other three will not and will only be updated as needed when business changes are made.
 
-## Inspect data
+## Data Inspection, Validation, and Modeling
 
 To ensure the source data is clean and consistent, I created a single, consolidated Python script, `initial_inspectdata.py`, which performs both structural inspection and data validation across all CSV files in `/source-data`.
 
@@ -57,13 +57,13 @@ This improved script combines initial inspection and detailed validation in a si
 
 Using this knowledge, I constructed the analytical model. The ERD and star schema diagrams can be found embedded in the audit as well as within this project under /documentation.
 
-## Execute ETL
+## ETL Pipeline
 
-Using the logic laid out in the analytical model, I created an ran the etl.py script that handles the ETL process for this project.
+Using the validated source data, I created an ran the etl.py script that handles the ETL process for this project.
 
 The script follows these steps:
 
-1. **Data Inspection**
+1. **Data Inspection (Pre-ETL)**
    - Runs the consolidated `initial_inspectdata.py` script before any transformations.
    - Halts the ETL process if any data quality issues are detected, ensuring only clean data is processed.
 
@@ -83,3 +83,11 @@ Since this data was fabricated, there weren't a lot of transformations needed, b
    - Saves all transformed tables (`dim_product`, `dim_date`, `dim_ingredient`, `bridge_product_ingredient`, `fact_orders`) as CSV files in `/staging-data` for downstream analysis.
 
 This ETL script demonstrates a full end-to-end pipeline, including data validation, transformation into dimensional models, and preparation of fact and dimension tables suitable for business intelligence tools like Tableau.
+
+## Add MySQL table loading into the end of ETL process
+
+## Analytics and Visualization
+
+## Insights & Business Recommendations
+
+## Future Enhancements
