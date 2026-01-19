@@ -164,4 +164,41 @@ bridge_product_ingredient.to_csv(
 )
 fact_orders.to_csv(STAGING_DIR / "fact_orders.csv", index=False)
 
-print("ETL pipeline completed successfully.")
+# -----------------------------
+# LOAD TO MYSQL
+# -----------------------------
+from sqlalchemy import create_engine
+
+# MySQL connection configuration
+MYSQL_USER = "root"
+MYSQL_PASSWORD = "Truehomie12"
+MYSQL_HOST = "localhost"
+MYSQL_PORT = 3306
+MYSQL_DB = "cookie_bakery_dw"
+
+# Create SQLAlchemy engine
+engine = create_engine(
+    f"mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DB}"
+)
+
+# Mapping of staging CSV DataFrames to MySQL table names
+mysql_tables = {
+    "dim_product": dim_product,
+    "dim_date": dim_date,
+    "dim_ingredient": dim_ingredient,
+    "bridge_product_ingredient": bridge_product_ingredient,
+    "fact_orders": fact_orders,
+}
+
+# Load tables in the correct order: dimensions -> bridge -> fact
+load_order = ["dim_product", "dim_date", "dim_ingredient", "bridge_product_ingredient", "fact_orders"]
+
+print("\nStarting MySQL load...")
+
+for table_name in load_order:
+    df = mysql_tables[table_name]
+    print(f"Loading {table_name} ({len(df)} rows) into MySQL...")
+    df.to_sql(table_name, con=engine, if_exists="append", index=False)
+    print(f"{table_name} loaded successfully!")
+
+print("All staging tables have been loaded into MySQL!")

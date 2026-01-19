@@ -53,19 +53,17 @@ The script includes the following features:
    - Generates a consolidated inspection report at `/source-data/consolidated_inspection_report.txt`.
    - Summarizes any detected issues and flags validation failures, allowing early detection of potential problems before ETL.
 
-This improved script combines initial inspection and detailed validation in a single workflow, streamlining data auditing and ensuring the dataset is ready for transformation and analysis.
-
 Using this knowledge, I constructed the analytical model. The ERD and star schema diagrams can be found embedded in the audit as well as within this project under /documentation.
 
 ## ETL Pipeline
 
-Using the validated source data, I created an ran the etl.py script that handles the ETL process for this project.
+Using the validated source data, I created and ran the etl.py script that handles the ETL process for this project.
 
 The script follows these steps:
 
 1. **Data Inspection (Pre-ETL)**
-   - Runs the consolidated `initial_inspectdata.py` script before any transformations.
-   - Halts the ETL process if any data quality issues are detected, ensuring only clean data is processed.
+   - Runs the consolidated `initial_inspectdata.py` script before any transformations
+   - Halts the ETL process if any data quality issues are detected
 
 2. **Extract**
    - Reads CSV files from `/source-data` including `shopify_orders.csv`, `shopify_products.csv`, `recipes.csv`, and `ingredients.csv`.
@@ -79,15 +77,67 @@ Since this data was fabricated, there weren't a lot of transformations needed, b
    - **Ingredient Cost per Product**: Aggregates ingredient costs to determine total cost per product.
    - **Fact Table (`fact_orders`)**: Combines orders with product, date, and cost data to calculate gross margin for each order.
 
-4. **Load**
-   - Saves all transformed tables (`dim_product`, `dim_date`, `dim_ingredient`, `bridge_product_ingredient`, `fact_orders`) as CSV files in `/staging-data` for downstream analysis.
+4. **Load - Staging**
+   - Saves all transformed tables (`dim_product`, `dim_date`, `dim_ingredient`, `bridge_product_ingredient`, `fact_orders`) as CSV files in `/staging-data` for backup, debugging, and downstream analysis.
 
-This ETL script demonstrates a full end-to-end pipeline, including data validation, transformation into dimensional models, and preparation of fact and dimension tables suitable for business intelligence tools like Tableau.
+5. **Load - MySQL Workbench**
+   - Uses Python (`sqlalchemy` and `pymysql`) to connect to a MySQL database (`cookie_bakery_dw`).
+   - Loads tables in the following order:
+      1. Dimensions --> `dim_product`, `dim_date`, `dim_ingredient`
+      2. Bridge --> `bridge_product_ingredient`
+      3. Fact --> `fact_orders`
+   - Prints row counts and confirms each table has been loaded successfully.
 
-## Add MySQL table loading into the end of ETL process
+This ETL script demonstrates a full end-to-end pipeline, including data validation, dimensional modeling, and preparation of fact and dimension tables suitable for BI tools like Tableau and MySQL.
 
 ## Analytics and Visualization
 
 ## Insights & Business Recommendations
 
 ## Future Enhancements
+
+# Reproducible Steps
+
+1. Clone the repository
+```
+git clone https://github.com/k80hys/bakery-pipeline.git
+cd bakery-pipeline
+```
+
+2. Install dependencies
+```
+pip install -r requirements.txt
+```
+
+3. Generate source CSVs
+```
+python scripts/createcsv.py
+```
+
+4. Run data inspection and validation
+```
+python scripts/initial_inspectdata.py
+```
+
+5. Generate MySQL schema
+```
+python scripts/generate_schema_sql.py
+```
+
+6. In MySQL Workbench or equivalent:
+```
+CREATE DATABASE IF NOT EXISTS cookie_bakery_dw;
+USE cookie_bakery_dw;
+SOURCE sql/auto_generated_schema.sql;
+```
+
+7. Run ETL to load tables
+```
+python scripts/etl.py
+```
+
+8. Verify data in MySQL Workbench
+```
+SELECT COUNT(*) FROM dim_product;
+SELECT COUNT(*) FROM fact_orders;
+SELECT * FROM bridge_product_ingredient LIMIT 5;

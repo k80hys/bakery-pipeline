@@ -57,14 +57,12 @@ cost_per_gram            float64
 dtype: object 
 
 Sample Rows:
-          ingredient unit  grams_per_unit  ... container_grams cost_per_unit  cost_per_gram
-0  All-purpose flour  cup           120.0  ...             454          0.25       0.002083
-1             Butter  cup           227.0  ...             454          1.20       0.005286
-2        White sugar  cup           200.0  ...            1814          0.40       0.002000
-3        Brown sugar  cup           220.0  ...             907          0.45       0.002045
-4    Chocolate chips  cup           170.0  ...             680          1.50       0.008824
-
-[5 rows x 8 columns] 
+          ingredient unit  grams_per_unit     supplier container_description  container_grams  cost_per_unit  cost_per_gram
+0  All-purpose flour  cup           120.0      FlourCo              1 lb bag              454           0.25       0.002083
+1             Butter  cup           227.0    DairyBest    4-stick box (1 lb)              454           1.20       0.005286
+2        White sugar  cup           200.0  SweetSource              4 lb bag             1814           0.40       0.002000
+3        Brown sugar  cup           220.0  SweetSource              2 lb bag              907           0.45       0.002045
+4    Chocolate chips  cup           170.0   CocoaWorld             24 oz bag              680           1.50       0.008824 
 
 Basic Statistics (Numeric Columns):
        grams_per_unit  container_grams  cost_per_unit  cost_per_gram
