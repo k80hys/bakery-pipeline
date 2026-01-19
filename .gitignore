@@ -417,3 +417,4 @@ FodyWeavers.xsd
 *.msm
 *.msp
 staging-data/credentials.json
+staging-data/credentials.json
