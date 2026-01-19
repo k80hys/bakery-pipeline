@@ -69,28 +69,63 @@ The script follows these steps:
    - Reads CSV files from `/source-data` including `shopify_orders.csv`, `shopify_products.csv`, `recipes.csv`, and `ingredients.csv`.
 
 3. **Transform**
-Since this data was fabricated, there weren't a lot of transformations needed, but I executed the following:
+Since this data was fabricated, there weren't many transformations needed, but I executed the following:
    - **Product Dimension (`dim_product`)**: Deduplicates products, creates a numeric key, and standardizes column names.
    - **Date Dimension (`dim_date`)**: Extracts unique dates from orders and creates attributes such as day of week, month, year, and a numeric date key.
    - **Ingredient Dimension (`dim_ingredient`)**: Deduplicates ingredients, creates a numeric key, and calculates `cost_per_gram`.
-   - **Bridge Table (`bridge_product_ingredient`)**: Links products to ingredients with quantities, enabling cost calculations.
+   - **Bridge Table (`bridge_product_ingredient`)**: Links products to ingredients with quantities for cost calculations.
    - **Ingredient Cost per Product**: Aggregates ingredient costs to determine total cost per product.
-   - **Fact Table (`fact_orders`)**: Combines orders with product, date, and cost data to calculate gross margin for each order.
+   - **Fact Table (`fact_orders`)**: Combines orders with product, date, and cost data to calculate gross margin.
+
+   Transformation-level validation ensures that surrogate keys, referential integrity, and derived metrics are correct.
 
 4. **Load - Staging**
    - Saves all transformed tables (`dim_product`, `dim_date`, `dim_ingredient`, `bridge_product_ingredient`, `fact_orders`) as CSV files in `/staging-data` for backup, debugging, and downstream analysis.
 
 5. **Load - MySQL Workbench**
-   - Uses Python (`sqlalchemy` and `pymysql`) to connect to a MySQL database (`cookie_bakery_dw`).
+   - Uses Python (`sqlalchemy` and `pymysql`) to connect to the `cookie_bakery_dw` database.
    - Loads tables in the following order:
-      1. Dimensions --> `dim_product`, `dim_date`, `dim_ingredient`
-      2. Bridge --> `bridge_product_ingredient`
-      3. Fact --> `fact_orders`
-   - Prints row counts and confirms each table has been loaded successfully.
+      1. Dimensions → `dim_product`, `dim_date`, `dim_ingredient`
+      2. Bridge → `bridge_product_ingredient`
+      3. Fact → `fact_orders`
+   - Prints row counts and terminates the load if counts or key constraints do not meet expectations.
 
 This ETL script demonstrates a full end-to-end pipeline, including data validation, dimensional modeling, and preparation of fact and dimension tables suitable for BI tools like Tableau and MySQL.
 
+## Post-Load Warehouse Validation (MySQL)
+
+After loading all tables into the `cookie_bakery_dw` warehouse, a comprehensive set of validation checks ensures the data is trustworthy for analytics and BI consumption. These checks are executed via a consolidated SQL script (`validation_checks.sql`) and cover table integrity, referential correctness, and business logic.
+
+Key validations include:
+
+1. **Table Existence & Row Counts**: Confirms that all dimension, bridge, and fact tables exist and have expected rows.
+2. **Foreign Key Integrity**: Ensures all fact table keys (`product_key`, `date_key`) exist in the corresponding dimension tables.
+3. **Null & Completeness Checks**: Confirms no critical columns in fact or dimension tables are null (`order_id`, `cookie_sku`, `ingredient`, etc.).
+4. **Negative or Impossible Values**: Verifies that `quantity > 0`, `total_price ≥ 0`, and `ingredient_cost ≥ 0`.
+5. **Derived Metric Validation**: Checks that `gross_margin` equals `total_price - ingredient_cost` within a small tolerance.
+6. **Ingredient Cost vs Revenue**: Ensures ingredient costs do not exceed the total order price.
+7. **Profitability / Margin Sanity Checks**: Reviews min, max, and average gross margin and average margin percentage.
+8. **Quantity vs Price Sanity**: Confirms price per unit is within reasonable bounds.
+9. **High-Level KPI Summary**: Aggregates totals and averages for revenue, ingredient cost, gross margin, and margin percentage to spot outliers or anomalies.
+
+These validations provide confidence that downstream analyses and Tableau dashboards are accurate, consistent, and aligned with business rules.
+
 ## Analytics and Visualization
+
+### Google Sheets Integration for Tableau Dashboard
+
+For the sake of this project, I decided to set up MySQL Workbench loading compatibility to showcase skills, while also relying on a simple automation to actually store the data for the practical Tableau usage purposes of this project, since my version of Tableau offers limited connection options. 
+
+To automate updates of Tableau dashboards from the staging CSVs, the project uses a Google Sheet as a live data source.
+
+- A Google Sheet named **`Cookie_Bakery`** is created to receive the staging data.
+- A **service account** is generated in Google Cloud, with its email shared on the sheet.
+- The service account JSON credentials are stored in `/staging-data/credentials.json`.
+- Both **Google Sheets API** and **Google Drive API** are enabled for the project; it may take a few minutes (~1–5 minutes) for changes to propagate before the Python script can access the sheet.
+- A Python script (`googlesheets.py`) reads all CSVs from `/staging-data` and uploads them to the sheet, creating or overwriting tabs as needed.
+- Tableau Public connects to this Google Sheet to pull data dynamically, ensuring dashboards reflect the latest ETL output.
+
+This approach provides a lightweight, cloud-accessible data source for visualization.
 
 ## Insights & Business Recommendations
 
@@ -141,3 +176,5 @@ python scripts/etl.py
 SELECT COUNT(*) FROM dim_product;
 SELECT COUNT(*) FROM fact_orders;
 SELECT * FROM bridge_product_ingredient LIMIT 5;
+
+NEXT: diagram in ASCII or markdown that visually shows staging CSV --> ETL --> MySQL --> Tableau
