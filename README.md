@@ -55,9 +55,18 @@ After loading all tables into the `cookie_bakery_dw` warehouse, the SQL script (
 
 Since my version of Tableau offers very limited connection options, not including MySQL, so I set up a Google Sheet as my Tableau source, and created the `googlesheets.py` automation (which operates off the Google Sheets API and Google Drive API) to load data to the Sheet.
 
-## Insights & Business Recommendations
+### Insights
+
+In the `/tableau-screenshots` folder I included screenshots of a few dashboards I put together to show basic product sales and revenue trends.
 
 ## Future Enhancements
+
+- **Real Shopify integration**
+- **Incremental ETL** - update the pipeline to pull only new or changed data
+- **Event-driven automation** - automatically trigger ETL on new orders
+- **Incorporate Instagram marketing data**
+- **Enhanced forecasting**
+- **Unit tests/CI/CD on ETL**
 
 # Reproducible Steps
 
@@ -104,5 +113,4 @@ python scripts/etl.py
 SELECT COUNT(*) FROM dim_product;
 SELECT COUNT(*) FROM fact_orders;
 SELECT * FROM bridge_product_ingredient LIMIT 5;
-
-NEXT: diagram in ASCII or markdown that visually shows staging CSV --> ETL --> MySQL --> Tableau
+```
