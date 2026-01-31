@@ -20,7 +20,7 @@ This project includes the following components:
 - **Schema documentation & ER diagram**
 - **ETL pipeline & transformation documentation**
 - **Data validation checks**
-- **Data storage**: MySQL Workbench
+- **Data storage**: MySQL Workbench / Google Drive
 - **Visualization dashboard**: Tableau
 - **Insights & business recommendations**
 - **README & future enhancements**
